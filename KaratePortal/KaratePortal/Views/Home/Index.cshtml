@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <br />
+            <br />
+            <p><img src="~/Images/NameKarate.svg.png" alt="Name Karate"></p>
+            <p>Description: <input value="" id="data" /></p>
+            <p class="lead">Karate (空手) is a Japanese martial art. It was developed in the former Ryūkyū Kingdom in what is now Okinawa Prefecture. Karate uses all parts of the human body as a weapon.</p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+
+            <h2>Kyokushin</h2>
+            <p><img src="~/Images/kangi_kai.png" alt="Kangi"></p>
+            <p>
+                Kyokushin (極真) is a style of stand-up, full contact karate,
+                ounded in 1964 by Korean-Japanese Masutatsu Oyama (大山倍達 Ōyama Masutatsu).
+                "Kyokushin" is Japanese for "the ultimate truth". It is rooted in a philosophy
+                of self-improvement, discipline and hard training.
+            </p>
+            <p><a class="btn btn-default" style="background-color:aqua" href="https://en.wikipedia.org/wiki/Kyokushin">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Shinkyokushin</h2>
+            <p><img src="~/Images/kangi_shin.jpg" alt="Kangi"></p>
+            <p>
+                Shinkyokushin-kai (新極真?) é um dos estilos de caratê que surgiu dos ensinamentos ministrados pelos discípulos diretos
+                do mestre Mas Oyama que não concordavam com o rumo que o estilo kyokushin estava tomando, assim criaram a nova escola Shinkyokushin-kai,
+                mas seguindo a mesma filosofia do Mestre Oyama', adicionando o kanji "Shin" que significa "novo", mas mantendo o "kyokushin" (caminho da verdade)
+            </p>
+            <p><a class="btn btn-default"  style="background-color:burlywood" href="https://pt.wikipedia.org/wiki/Shinkyokushin">Read more &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+            <h2>Kyokushin-Kan</h2>
+            <p><img src="~/Images/kangi_kan.png" alt="Kangi"></p>
+            <p>
+                After the death of Masutatsu Oyama in Kyokushinkai, there was a split and Royama
+                supported Kanche Shokei Matsui, remaining the Branch Chief of his Saitama Prefecture
+                On January 13, 2003, Hatsuo Royama established the Kyokushin Can International Organization.
+                He is currently the President of the International Kyokushin-Kan Karate-Do Renmei Federation (KyokushinKan Karate-Do Renmei).
+                Renmei in Japanese means "Federation"
+            </p>
+            <p><a class="btn btn-default" style="background-color:cadetblue" href="https://www.kyokushinkarate.com.ua/federation/73-simvolika-kyokushinkan.html">Read more &raquo;</a></p>
+        </div>
+    </div>
+@section scripts{
+    <script>
+        $(document).ready(() => {
+        console.log("document was ready");
+        if (window.addEventListener) {
+            console.log("adding listener");
+            window.addEventListener("message", listener);
+        } else {
+            window.attachEvent("onmessage", listener);
+        }
+    });
+    let listener = (event) => {
+        console.log(event.data);
+        $('#data').val(event.data);
+    }  
+    </script>    
+}

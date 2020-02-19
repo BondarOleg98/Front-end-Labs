@@ -1,0 +1,54 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-size: 13px;
+    font-family: Verdana, Arial, Helvetica, Sans-Serif;
+    background-color: #f7f7fa;
+}
+
+/* Set padding to keep content from hitting the edges */
+
+#tableBlock {
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+
+
+#editBlock {
+    display: none;
+    float: left;
+    margin-bottom: 30px;
+    margin-left: 50px;
+}
+
+a{
+    text-decoration: none;
+}
+
+.c {
+    border: 1px solid #333;
+    display: inline-block;
+    padding: 5px 15px; 
+    background-color: azure;
+    color:cornflowerblue;
+}
+
+#createBlock {
+   
+    float: left;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    
+}
+.button {
+    background-color: aqua;
+}
+
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}

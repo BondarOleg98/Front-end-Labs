@@ -1,0 +1,50 @@
+﻿@model KaratePortal.Models.KarateTeam.Team
+@using KaratePortal.Models.PersonKarate
+@{
+    ViewBag.Title = "Team " + @Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TeamDetails</h2>
+
+<div>
+    <h4>Team</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Organization)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organization)
+        </dd>
+        <dd>
+            <ul>
+                @foreach (KarateStudent karateStudent in Model.KarateStudents)
+                {
+                    <li>@karateStudent.Name @karateStudent.LastName</li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "ShowTeams")
+</p>

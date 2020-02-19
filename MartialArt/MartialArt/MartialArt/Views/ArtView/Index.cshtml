@@ -1,0 +1,201 @@
+﻿@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            GetArts();
+
+            $("#editArt").click(function (event) {
+                event.preventDefault();
+                EditArt();
+            });
+
+            $("#addArt").click(function (event) {
+                event.preventDefault();
+                AddArt();
+            });
+
+        });
+
+        function GetArts() {
+
+            $("#createBlock").css('display', 'block');
+            $("#editBlock").css('display', 'none');
+            $.ajax({
+                url: '/api/arts',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    WriteResponse(data);
+                },
+                error: function (x, y, z) {
+                    console.log("Error: " + x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        function AddArt() {
+
+            var art = {
+                Name: $('#addName').val(),
+                CountCountry: $('#addCountCountry').val(),
+                Year: $('#addYear').val()
+            };
+
+            $.ajax({
+                url: '/api/arts/',
+                type: 'POST',
+                data: JSON.stringify(art),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetArts();
+                },
+                error: function (x, y, z) {
+                    console.log("Error: " + x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        function DeleteArt(id) {
+
+            $.ajax({
+                url: '/api/arts/' + id,
+                type: 'DELETE',
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetArts();
+                },
+                error: function (x, y, z) {
+                    console.log("Error: " + x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+        function EditArt() {
+            var id = $('#editId').val()
+            var art = {
+                Id: $('#editId').val(),
+                Name: $('#editName').val(),
+                CountCountry: $('#editCountCountry').val(),
+                Year: $('#editYear').val()
+            };
+            $.ajax({
+                url: '/api/arts/' + id,
+                type: 'PUT',
+                data: JSON.stringify(art),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetArts();
+                },
+                error: function (x, y, z) {
+                    console.log("Error: " + x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        function WriteResponse(arts) {
+            var strResult = "<table class='table' id='tableBlock'>" +
+                "<tr>" +
+                "<th>Name</th>" +
+                "<th>Count country</th>" +
+                "<th>Year</th>" +
+                "<th></th>" +
+                "</tr>";
+            $.each(arts, function (index, art) {
+                strResult += "<tr><td>" + art.Name +
+                    "</td><td>" + art.CountCountry +
+                    "</td><td>" + art.Year +
+                    "</td><td>" +
+                    "<a class='c' id='editItem' data-item='" + art.Id +
+                    "' onclick='EditItem(this);' >Edit</a>" + " |  " +
+                    "<a class='c' id='delItem' data-item='" + art.Id +
+                    "' onclick='DeleteItem(this);' >Delete</a></td>"
+                "</tr>";
+            });
+            strResult += "</table>";
+            $("#tableBlock").html(strResult);
+
+        }
+        function DeleteItem(el) {
+            var id = $(el).attr('data-item');
+            DeleteArt(id);
+        }
+        function EditItem(el) {
+            var id = $(el).attr('data-item');
+            GetArt(id);
+        }
+        function ShowArt(art) {
+            if (art != null) {
+                $("#createBlock").css('display', 'none');
+                $("#editBlock").css('display', 'block');
+                $("#editId").val(art.Id);
+                $("#editName").val(art.Name);
+                $("#editCountCountry").val(art.CountCountry);
+                $("#editYear").val(art.Year);
+            }
+            else {
+                console.log("This is no art");
+            }
+        }
+        function GetArt(id) {
+            $.ajax({
+                url: '/api/arts/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    ShowArt(data);
+                },
+                error: function (x, y, z) {
+                    console.log("Error: " + x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+
+    </script>
+}
+<br />
+<br />
+<div id="editBlock">
+    <p><b>Edit art</b></p>
+    <table>
+        <tr>
+            <td><input type="hidden" id="editId" /></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" id="editName" /></td>
+        </tr>
+        <tr>
+            <td>Count country:</td>
+            <td><input type="number" id="editCountCountry" /></td>
+        </tr>
+        <tr>
+            <td>Year: </td>
+            <td><input type="number" id="editYear" /></td>
+        </tr>
+    </table>
+    <button id="editArt" class="button">Save</button>
+</div>
+
+<div id="createBlock">
+    <p><b>Add art</b></p>
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" id="addName" /></td>
+        </tr>
+        <tr>
+            <td>Count country:</td>
+            <td><input type="number" id="addCountCountry" /></td>
+        </tr>
+        <tr>
+            <td>Year: </td>
+            <td><input type="number" id="addYear" /></td>
+        </tr>
+    </table>
+    <button id="addArt" class="button">Save</button>
+</div>
+
+<div id="tableBlock"></div>
+
+
+
+
