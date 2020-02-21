@@ -18,7 +18,7 @@
             <td>
                 <a href={this.link} style={{ color: "cadetblue", textDecoration: "none" }}>Edit </a>
 
-                <button style={{ color: "red" }} onClick={this.onClick}>Delete</button>
+                <button style={{ color: "red" }} onClick={this.onClick} id="delete">Delete</button>
                 </td>
         </tr>;
     }
@@ -77,7 +77,8 @@ class CoachForm extends React.Component {
                     <input type="text"
                         placeholder="Name"
                         value={this.state.name}
-                        onChange={this.onChangeName} />
+                        onChange={this.onChangeName}
+                        id="name"/>
                    
                 </p>
                 <p>
@@ -85,6 +86,7 @@ class CoachForm extends React.Component {
                         placeholder="Last name"
                         value={this.state.lastName}
                         onChange={this.onChangeLastName}
+                        id="lastName"
                     />
                 </p>
                 <p>
@@ -92,9 +94,10 @@ class CoachForm extends React.Component {
 
                         value={this.state.age}
                         onChange={this.onChangeAge}
+                        id="age"
                     />
                 </p>
-                <input type="submit" style={{ color:"green" }} value="Add a coach" />
+                <input type="submit" style={{ color: "green" }} value="Add a coach" id="addCoach"/>
             </form>
         );
     }
