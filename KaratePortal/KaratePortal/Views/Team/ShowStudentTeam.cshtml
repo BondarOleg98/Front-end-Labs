@@ -1,0 +1,52 @@
+﻿@model IEnumerable<KaratePortal.Models.PersonKarate.KarateStudent>
+
+@{
+    ViewBag.Title = "Show students in teams";
+}
+
+<h2>Show students in teams</h2>
+
+<h2>List students in teams</h2>
+<table class="table">
+    <tr>
+        <th>
+            <b>Name</b>
+        </th>
+        <th>
+            <b>Last name</b>
+        </th>
+        <th>
+            <b>Age</b>
+        </th>
+        <th>
+            <b>Belt</b>
+        </th>
+        <th>
+            <b>Name of team</b>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Belt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Team.Name)
+        </td>
+    </tr>
+}
+</table>
+<p>
+    @Html.ActionLink("Show teams", "ShowTeams")
+</p>

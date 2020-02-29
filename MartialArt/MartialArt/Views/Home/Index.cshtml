@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+    
+<div style="position:absolute;left:24%">
+    <h4 style ="margin-top: 50px">Send data into frame: </h4>
+    <iframe scrolling="yes" allowtransparency="true" id="iframe"
+            src="http://localhost:49961/"
+            style="background-color:#f7f7fa; border:inherit; margin-top: 10px"
+            width="650" height="350">
+    </iframe>
+</div>
+
+<input id="value" type="text" style="position:absolute; left:42%; margin-top: 50px">
+<input id="button" type="button" value="Send message" style="position:absolute; left:56%; margin-top: 50px" />
+
+@section scripts
+{
+    <script>
+        button.onclick = () => {
+            let val = document.getElementById('value').value;
+            let wn = document.getElementById('iframe').contentWindow;
+            wn.postMessage(val, 'http://localhost:49961/');
+            console.log("send a message");
+        };
+            
+    </script>
+}
